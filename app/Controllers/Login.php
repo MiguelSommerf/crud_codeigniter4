@@ -15,7 +15,7 @@ class Login extends BaseController
     {
         if (!$this->validate([
             'emailuser' => 'required|valid_email',
-            'senhauser' => 'required|min_length:[8]',
+            'senhauser' => 'required|min_length[8]',
         ])) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
             //redirect()->back() -> redireciona o usuário para a tela de onde ele veio.
@@ -28,6 +28,7 @@ class Login extends BaseController
         if (!empty($user)) {
             if(password_verify($user['senha_usuario'], $this->request->getPost('senhauser'))){
                 session()->set('id', $user['id_usuario']);
+                return view('home');
                 //session()->set() cria uma chave e armazena o valor desejado nela.
             } else {
                 session()->setFlashdata('error', 'Usuário e/ou senha incorretos.');
