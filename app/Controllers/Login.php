@@ -30,13 +30,12 @@ class Login extends BaseController
                 session()->set('id', $user['id_usuario']);
                 //session()->set() cria uma chave e armazena o valor desejado nela.
             } else {
-
-                //precisa de mensagem
+                session()->setFlashdata('error', 'Usuário e/ou senha incorretos.');
+                //session()->setFlashdata() cria uma chave e armazena o valor desejado nela, mas com a diferença que esse valor só existe na próxima requisição. Na view, é necessário utilizar o método getFlashdata() para recuperar o valor armazenado.
                 return redirect()->back()->withInput();
             }
         } else {
-
-            //precisa de mensagem
+            session()->setFlashdata('error', 'Usuário e/ou senha incorretos.');
             return redirect()->back()->withInput();
         }
     }
