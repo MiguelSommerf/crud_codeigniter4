@@ -11,6 +11,11 @@ class Login extends BaseController
         $this->userModel = new UserModel();
     }
 
+    public function index()
+    {
+        return view('login');
+    }
+    
     public function validarLogin()
     {
         if (!$this->validate([
